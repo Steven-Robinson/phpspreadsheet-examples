@@ -87,13 +87,6 @@ class SpreadsheetService
             ->applyFromArray($borderStyles);
     }
 
-    public function outputDownloadHeaders(string $filename)
-    {
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-    }
-
     public function setRowColour($cellRange, $colour): void
     {
         $this->sheet
@@ -115,6 +108,14 @@ class SpreadsheetService
 
     public function freezeHeaders()
     {
-        $this->sheet->freezePane(self::FREEZE_HEADERS_CELL);
+        $this->sheet
+            ->freezePane(self::FREEZE_HEADERS_CELL);
+    }
+
+    public function outputDownloadHeaders(string $filename)
+    {
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
     }
 }
