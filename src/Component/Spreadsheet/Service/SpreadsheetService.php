@@ -12,6 +12,7 @@ class SpreadsheetService
     const HEADER_COLUMN_RANGE_FORMAT = 'A1:%s1';
     const ROW_CELL_RANGE_FORMAT = 'A%d:%s%d';
     const FULL_SPREADSHEET_RANGE_FORMAT = 'A1:%s%d';
+    const FREEZE_HEADERS_CELL = 'A2';
 
     private $spreadsheet;
     private $writer;
@@ -110,5 +111,10 @@ class SpreadsheetService
                 ->getColumnDimension($col)
                 ->setAutoSize(true);
         }
+    }
+
+    public function freezeHeaders()
+    {
+        $this->sheet->freezePane(self::FREEZE_HEADERS_CELL);
     }
 }

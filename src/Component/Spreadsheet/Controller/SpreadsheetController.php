@@ -30,8 +30,9 @@ class SpreadsheetController
         $this->spreadsheet->setHeaderRowBold();
         $this->spreadsheet->styleBorders('00000000');
         $this->spreadsheet->colourRowConditionallyFromCellValue('C', 'thirteen', '00CCCCCC');
-        $this->spreadsheet->outputDownloadHeaders($filename = 'report.xlsx');
         $this->spreadsheet->setAutoColumnWidths();
+        $this->spreadsheet->freezeHeaders();
+        $this->spreadsheet->outputDownloadHeaders($filename = 'report.xlsx');
 
         $this->spreadsheet->getWriter()->save('php://output');
     }
