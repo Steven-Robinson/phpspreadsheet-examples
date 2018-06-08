@@ -102,4 +102,13 @@ class SpreadsheetService
             ->getStartColor()
             ->setARGB($colour);
     }
+
+    public function setAutoColumnWidths()
+    {
+        for ($col = 'A'; $col <= $this->sheet->getHighestColumn(); $col++) {
+            $this->sheet
+                ->getColumnDimension($col)
+                ->setAutoSize(true);
+        }
+    }
 }

@@ -31,6 +31,7 @@ class SpreadsheetController
         $this->spreadsheet->styleBorders('00000000');
         $this->spreadsheet->colourRowConditionallyFromCellValue('C', 'thirteen', '00CCCCCC');
         $this->spreadsheet->outputDownloadHeaders($filename = 'report.xlsx');
+        $this->spreadsheet->setAutoColumnWidths();
 
         $this->spreadsheet->getWriter()->save('php://output');
     }
