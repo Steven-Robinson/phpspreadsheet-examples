@@ -3,6 +3,7 @@
 namespace App\Component\Spreadsheet\Controller;
 
 use App\Component\Spreadsheet\Service\SpreadsheetService;
+use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
 
 class SpreadsheetController
 {
@@ -34,6 +35,13 @@ class SpreadsheetController
         $this->spreadsheet->freezeHeaders();
         $this->spreadsheet->outputDownloadHeaders($filename = 'report.xlsx');
 
-        $this->spreadsheet->getWriter()->save('php://output');
+        try {
+            $this->spreadsheet->getWriter()->save('php://output');
+        } catch(WriterException $e) {
+            // log exception message here
+            return false;
+        }
+
+        return true;
     }
 }
